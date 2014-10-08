@@ -1,0 +1,16 @@
+body {
+	margin:50px 0px; 
+	padding:0px;
+	text-align: center;
+}
+
+.cell {
+	border: 1px solid #000;
+	height: 200px;
+	width: 200px;
+	display: inline-block;
+}
+
+.clearfix {
+	clear: both;
+}
