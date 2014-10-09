@@ -5,26 +5,18 @@ dolphin: http://2.bp.blogspot.com/-0lY_yVIigy8/UbDUfZkIT8I/AAAAAAAAMKo/BWwuuJHfC
 <html>
 	<head>
 		<title>Tic Tac Toe</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-
-		<script src="main.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/angular.min.js"></script>
+		<script src="js/main.js"></script>
 	</head>
 
-	<body onload="startGame">
-		<div id="board">
-			<div id="c0" class="cell"></div>
-			<div id="c1" class="cell"></div>
-			<div id="c2" class="cell"></div>
-
-			<div class="clearfix"></div>
-			<div id="c3" class="cell"></div>
-			<div id="c4" class="cell"></div>
-			<div id="c5" class="cell"></div>
-
-			<div class="clearfix"></div>
-			<div id="c6" class="cell"></div>
-			<div id="c7" class="cell"></div>
-			<div id="c8" class="cell"></div>
+	<body ng-app="myApp">
+		<div ng-controller="myController" class="board">
+			<div ng-repeat="eachCell in cellList">
+				<div class="allCells">
+					
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
