@@ -1,6 +1,3 @@
-<!-- doge: http://growld.com/wp-content/uploads/2014/02/pixel-doge.gif
-dolphin: http://2.bp.blogspot.com/-0lY_yVIigy8/UbDUfZkIT8I/AAAAAAAAMKo/BWwuuJHfCLk/s1600/shaking-dolphin.gif -->
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,9 +9,9 @@ dolphin: http://2.bp.blogspot.com/-0lY_yVIigy8/UbDUfZkIT8I/AAAAAAAAMKo/BWwuuJHfC
 
 	<body ng-app="myApp">
 		<div ng-controller="myController" class="board">
-			<div ng-repeat="eachCell in cellList">
-				<div class="allCells">
-					
+			<div ng-repeat="currentCell in cellList">
+				<div class="allCells" ng-click="playerPicks(currentCell)">
+					Num: {{currentCell.num}}<br>Status: {{currentCell.status}}
 				</div>
 			</div>
 		</div>
