@@ -10,8 +10,8 @@
 	<body ng-app="myApp">
 		<div ng-controller="myController" class="board">
 			<div ng-repeat="currentCell in cellList">
-				<div class="allCells" ng-click="playerPicks(currentCell)">
-					Num: {{currentCell.num}}<br>Status: {{currentCell.status}}
+				<div class="allCells" ng-click="playerPicks(currentCell); checkWinner()" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}">
+					<!-- Num: {{currentCell.num}}<br>Status: {{currentCell.status}} -->
 				</div>
 			</div>
 		</div>

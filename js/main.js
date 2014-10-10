@@ -1,9 +1,6 @@
 var myApp = angular.module("myApp", [])
 
 .controller("myController", function($scope) {
-
-  console.log("i'm alive");
-
   $scope.cellList = [
     {num: "c0", status: null},
     {num: "c1", status: null},
@@ -19,7 +16,7 @@ var myApp = angular.module("myApp", [])
   $scope.turnCounter = 0;
 
   $scope.playerPicks = function(clickedCell) {
-    console.log("clicked " + clickedCell.num + ". it's " + $scope.turnCounter + "'s turn");
+
 
     if (clickedCell.status != null) {
       return;
@@ -28,6 +25,37 @@ var myApp = angular.module("myApp", [])
     } else {
       clickedCell.status = "o";
     }$scope.turnCounter++;
+
+    console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. it's " + $scope.turnCounter + "'s turn");
   };
 
+  $scope.checkWinner = function() {
+    
+    if (($scope.cellList[0].status == "x" && $scope.cellList[1].status == "x" && $scope.cellList[2].status == "x") || 
+        ($scope.cellList[3].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[5].status == "x") || 
+        ($scope.cellList[6].status == "x" && $scope.cellList[7].status == "x" && $scope.cellList[8].status == "x") || 
+        ($scope.cellList[0].status == "x" && $scope.cellList[3].status == "x" && $scope.cellList[6].status == "x") ||
+        ($scope.cellList[1].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[7].status == "x") ||
+        ($scope.cellList[2].status == "x" && $scope.cellList[5].status == "x" && $scope.cellList[8].status == "x") ||
+        ($scope.cellList[0].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[8].status == "x") ||
+        ($scope.cellList[2].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[6].status == "x")) {
+          
+          // return something ;
+
+    } else if (($scope.cellList[0].status == "y" && $scope.cellList[1].status == "y" && $scope.cellList[2].status == "y") || 
+        ($scope.cellList[3].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[5].status == "y") || 
+        ($scope.cellList[6].status == "y" && $scope.cellList[7].status == "y" && $scope.cellList[8].status == "y") || 
+        ($scope.cellList[0].status == "y" && $scope.cellList[3].status == "y" && $scope.cellList[6].status == "y") ||
+        ($scope.cellList[1].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[7].status == "y") ||
+        ($scope.cellList[2].status == "y" && $scope.cellList[5].status == "y" && $scope.cellList[8].status == "y") ||
+        ($scope.cellList[0].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[8].status == "y") ||
+        ($scope.cellList[2].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[6].status == "y")) {
+          
+          // return something ;
+
+
+    } else {
+        // return something ;
+    };
+  };
 });

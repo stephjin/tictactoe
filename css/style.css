@@ -15,3 +15,14 @@
   float: left;
 }
 
+.xMarker {
+  background-image: url("../images/doge.gif");
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+}
+
+.yMarker {
+  background-image: url("../images/dolphin.gif");
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+}
