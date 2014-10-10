@@ -14,10 +14,11 @@ var myApp = angular.module("myApp", [])
   ];
 
   $scope.turnCounter = 0;
+  $scope.xWin = false;
+  $scope.oWin = false;
 
+// Player X picks any cell to start
   $scope.playerPicks = function(clickedCell) {
-
-
     if (clickedCell.status != null) {
       return;
     } else if ($scope.turnCounter%2 == 0) {
@@ -29,6 +30,7 @@ var myApp = angular.module("myApp", [])
     console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. it's " + $scope.turnCounter + "'s turn");
   };
 
+// Checks for winner based on possible combinations. xWin or yWin changes from false to true depending on who wins.
   $scope.checkWinner = function() {
     
     if (($scope.cellList[0].status == "x" && $scope.cellList[1].status == "x" && $scope.cellList[2].status == "x") || 
@@ -40,22 +42,45 @@ var myApp = angular.module("myApp", [])
         ($scope.cellList[0].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[8].status == "x") ||
         ($scope.cellList[2].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[6].status == "x")) {
           
-          // return something ;
+        $scope.xWin = true;
+        $scope.winner();
 
-    } else if (($scope.cellList[0].status == "y" && $scope.cellList[1].status == "y" && $scope.cellList[2].status == "y") || 
-        ($scope.cellList[3].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[5].status == "y") || 
-        ($scope.cellList[6].status == "y" && $scope.cellList[7].status == "y" && $scope.cellList[8].status == "y") || 
-        ($scope.cellList[0].status == "y" && $scope.cellList[3].status == "y" && $scope.cellList[6].status == "y") ||
-        ($scope.cellList[1].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[7].status == "y") ||
-        ($scope.cellList[2].status == "y" && $scope.cellList[5].status == "y" && $scope.cellList[8].status == "y") ||
-        ($scope.cellList[0].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[8].status == "y") ||
-        ($scope.cellList[2].status == "y" && $scope.cellList[4].status == "y" && $scope.cellList[6].status == "y")) {
+    } else if (($scope.cellList[0].status == "o" && $scope.cellList[1].status == "o" && $scope.cellList[2].status == "o") || 
+        ($scope.cellList[3].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[5].status == "o") || 
+        ($scope.cellList[6].status == "o" && $scope.cellList[7].status == "o" && $scope.cellList[8].status == "o") || 
+        ($scope.cellList[0].status == "o" && $scope.cellList[3].status == "o" && $scope.cellList[6].status == "o") ||
+        ($scope.cellList[1].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[7].status == "o") ||
+        ($scope.cellList[2].status == "o" && $scope.cellList[5].status == "o" && $scope.cellList[8].status == "o") ||
+        ($scope.cellList[0].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[8].status == "o") ||
+        ($scope.cellList[2].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[6].status == "o")) {
           
-          // return something ;
+          $scope.oWin = true;
+          $scope.winner();
 
-
+    } else if ( ($scope.cellList[0].status == "o" || $scope.cellList[0].status == "x") && 
+        ($scope.cellList[1].status == "o" || $scope.cellList[1].status == "x") &&
+        ($scope.cellList[2].status == "o" || $scope.cellList[2].status == "x") &&
+        ($scope.cellList[3].status == "o" || $scope.cellList[3].status == "x") &&
+        ($scope.cellList[4].status == "o" || $scope.cellList[4].status == "x") &&
+        ($scope.cellList[5].status == "o" || $scope.cellList[5].status == "x") &&
+        ($scope.cellList[6].status == "o" || $scope.cellList[6].status == "x") && 
+        ($scope.cellList[7].status == "o" || $scope.cellList[7].status == "x") &&
+        ($scope.cellList[8].status == "o" || $scope.cellList[8].status == "x")) {
+          alert("Cat's game! womp womp");
     } else {
-        // return something ;
+        return;
     };
   };
+
+// winner function creates an alert to indicate who won
+  $scope.winner = function () {
+    if ($scope.xWin == true) {
+      alert("DOGE WINS!");
+    } else {
+      if ($scope.oWin == true) {
+        alert("DOLFIN WINS!");
+      }
+    }
+  };
+
 });
