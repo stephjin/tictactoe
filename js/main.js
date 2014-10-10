@@ -1,6 +1,6 @@
 var myApp = angular.module("myApp", [])
 
-.controller("myController", function($scope) {
+.controller("MyController", function($scope) {
   $scope.cellList = [
     {num: "c0", status: null},
     {num: "c1", status: null},
@@ -16,6 +16,7 @@ var myApp = angular.module("myApp", [])
   $scope.turnCounter = 0;
   $scope.xWin = false;
   $scope.oWin = false;
+  $scope.isGameOver = false;
 
 // Player X picks any cell to start
   $scope.playerPicks = function(clickedCell) {
