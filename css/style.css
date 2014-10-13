@@ -1,5 +1,5 @@
 body {
-	margin: 10% 35%; 
+	margin: 10% 33%; 
 }
 
 .board {
@@ -13,6 +13,7 @@ body {
 	width: 200px;
 	display: inline-block;
   float: left;
+  position: relative;
 }
 
 .xMarker {
@@ -25,4 +26,21 @@ body {
   background-image: url("../images/dolphin.gif");
   background-repeat: no-repeat;
   background-size: 200px 200px;
+}
+
+.winnerFull {
+  height: 620px;
+  width: 620px;
+  position: absolute;
+  top: 18%;
+  left: 33%;
+}
+
+.resetButton {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  right: 10%;
 }

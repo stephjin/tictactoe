@@ -10,13 +10,12 @@ var myApp = angular.module("myApp", [])
     {num: "c5", status: null},
     {num: "c6", status: null},
     {num: "c7", status: null},
-    {num: "c8", status: null},
+    {num: "c8", status: null}
   ];
 
   $scope.turnCounter = 0;
   $scope.xWin = false;
   $scope.oWin = false;
-  $scope.isGameOver = false;
 
 // Player X picks any cell to start
   $scope.playerPicks = function(clickedCell) {
@@ -67,7 +66,7 @@ var myApp = angular.module("myApp", [])
         ($scope.cellList[6].status == "o" || $scope.cellList[6].status == "x") && 
         ($scope.cellList[7].status == "o" || $scope.cellList[7].status == "x") &&
         ($scope.cellList[8].status == "o" || $scope.cellList[8].status == "x")) {
-          alert("Cat's game! womp womp");
+          alert("cat's game ");
     } else {
         return;
     };
@@ -76,12 +75,31 @@ var myApp = angular.module("myApp", [])
 // winner function creates an alert to indicate who won
   $scope.winner = function () {
     if ($scope.xWin == true) {
-      alert("DOGE WINS!");
+      console.log("DOGE WINS!");
+
     } else {
       if ($scope.oWin == true) {
-        alert("DOLFIN WINS!");
+        console.log("DOLFIN WINS!");
       }
     }
   };
 
+// play again button
+  $scope.newGame = function () {
+    $scope.cellList = [
+      {num: "c0", status: null},
+      {num: "c1", status: null},
+      {num: "c2", status: null},
+      {num: "c3", status: null},
+      {num: "c4", status: null},
+      {num: "c5", status: null},
+      {num: "c6", status: null},
+      {num: "c7", status: null},
+      {num: "c8", status: null}
+    ];
+
+    $scope.turnCounter = 0;
+    $scope.xWin = false;
+    $scope.oWin = false;
+  };
 });

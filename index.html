@@ -8,12 +8,16 @@
 	</head>
 
 	<body ng-app="myApp">
-		<div ng-controller="MyController" class="board">
+		<div ng-controller="MyController" class="board">	
 			<div ng-repeat="currentCell in cellList">
-				<div class="allCells" ng-click="playerPicks(currentCell); checkWinner()" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}">
-					<!-- Num: {{currentCell.num}}<br>Status: {{currentCell.status}} -->
+				<div class="allCells" ng-click="playerPicks(currentCell); checkWinner()" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}" >
+					
 				</div>
 			</div>
+			<img class="winnerFull" ng-src="images/doge.gif" ng-show="xWin == true">
+			<img class="winnerFull" ng-src="images/dolphin.gif" ng-show="oWin == true">
+			<img class="resetButton" ng-src="images/doge.gif" ng-show="oWin == true" ng-click="newGame()">
+			<img class="resetButton" ng-src="images/dolphin.gif" ng-show="xWin == true" ng-click="newGame()">
 		</div>
 	</body>
 </html>
