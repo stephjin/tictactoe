@@ -1,10 +1,27 @@
 body {
-	margin: 10% 33%; 
+/*	margin: 10% 33%; */  
+  background: url('http://p1.pichost.me/i/63/1874845.jpg');
 }
 
 .board {
-  width: 750px;
+  width: 610px;
   height: 750px;
+  background: #fff;
+  opacity: 0.95;
+  margin: 2% auto;
+  padding: 1%;
+}
+
+h1 {
+  font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans serif;
+  font-size: 70px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+ -webkit-text-fill-color: white;
+ -webkit-text-stroke-width: 3px;
+ -webkit-text-stroke-color: black;
 }
 
 .allCells {
@@ -14,6 +31,14 @@ body {
 	display: inline-block;
   float: left;
   position: relative;
+  margin: 0 auto;
+}
+
+.winnerFull {
+  height: 620px;
+  width: 620px;
+  position: absolute;
+  left: 530px;
 }
 
 .xMarker {
@@ -26,14 +51,6 @@ body {
   background-image: url("../images/dolphin.gif");
   background-repeat: no-repeat;
   background-size: 200px 200px;
-}
-
-.winnerFull {
-  height: 620px;
-  width: 620px;
-  position: absolute;
-  top: 18%;
-  left: 33%;
 }
 
 .resetButton {

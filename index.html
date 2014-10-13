@@ -9,15 +9,16 @@
 
 	<body ng-app="myApp">
 		<div ng-controller="MyController" class="board">	
+			<h1>TIC TAC TOE</h1>
 			<div ng-repeat="currentCell in cellList">
 				<div class="allCells" ng-click="playerPicks(currentCell); checkWinner()" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}" >
-					
 				</div>
 			</div>
 			<img class="winnerFull" ng-src="images/doge.gif" ng-show="xWin == true">
 			<img class="winnerFull" ng-src="images/dolphin.gif" ng-show="oWin == true">
 			<img class="resetButton" ng-src="images/doge.gif" ng-show="oWin == true" ng-click="newGame()">
 			<img class="resetButton" ng-src="images/dolphin.gif" ng-show="xWin == true" ng-click="newGame()">
+			<!-- <p ng-show="xWin == true">PLAY AGAIN!</p> -->
 		</div>
 	</body>
 </html>
