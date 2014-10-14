@@ -72,7 +72,7 @@ var myApp = angular.module("MyApp", [])
     };
   };
 
-// winner function creates an alert to indicate who won
+// winner function logs which player won
   $scope.winner = function () {
     if ($scope.xWin == true) {
       console.log("DOGE WINS!");
