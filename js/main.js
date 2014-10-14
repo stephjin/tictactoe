@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", [])
+var myApp = angular.module("MyApp", [])
 
 .controller("MyController", function($scope) {
   $scope.cellList = [

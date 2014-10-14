@@ -1,11 +1,10 @@
-body {
-/*	margin: 10% 33%; */  
-  background: url('http://p1.pichost.me/i/63/1874845.jpg');
+body { 
+  background: url('../images/space.jpg');
 }
 
 .board {
   width: 610px;
-  height: 750px;
+  height: 770px;
   background: #fff;
   opacity: 0.95;
   margin: 2% auto;
@@ -53,11 +52,66 @@ h1 {
   background-size: 200px 200px;
 }
 
-.resetButton {
+/*.resetButton {
   height: 45px;
   width: 45px;
   border-radius: 50%;
   position: absolute;
   top: 5%;
   right: 10%;
+}*/
+
+#newGameButton {
+  text-align: center;
+  margin-left: 45%;
+  margin-top: 20px;
+  position: relative;
 }
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dogeText {
+    opacity:0;
+    position: absolute;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 48px; 
+}
+
+#dtA {
+    -webkit-animation:fade-in 3s infinite;
+    -webkit-animation-delay: 0.5s;
+    color: cyan;
+}
+
+#dtB {
+    right: 360px;
+    bottom: 350px;
+    -webkit-animation:fade-in 1s infinite;
+    -webkit-animation-delay: 0.5s;  
+    color: yellow;
+}
+
+#dtC {
+    left:210px;
+    bottom: 500px;
+    -webkit-animation:fade-in 3s infinite;
+    -webkit-animation-delay: 0.5s;  
+    color: magenta;
+}
+
+#dtD {
+    right:100px;
+    bottom: 700px;
+    -webkit-animation:fade-in 5s infinite;
+    -webkit-animation-delay: 0.5s; 
+    color: red;
+}
+
+
