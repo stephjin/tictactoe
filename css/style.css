@@ -66,6 +66,7 @@ h1 {
   margin-left: 45%;
   margin-top: 20px;
   position: relative;
+  
 }
 
 @-webkit-keyframes fade-in {
@@ -91,7 +92,7 @@ h1 {
 }
 
 #dtB {
-    right: 360px;
+    left: 60px;
     bottom: 350px;
     -webkit-animation:fade-in 1s infinite;
     -webkit-animation-delay: 0.5s;  
@@ -99,10 +100,10 @@ h1 {
 }
 
 #dtC {
-    left:210px;
-    bottom: 500px;
+    left:310px;
+    bottom: 700px;
     -webkit-animation:fade-in 3s infinite;
-    -webkit-animation-delay: 0.5s;  
+    -webkit-animation-delay: 0.8s;  
     color: magenta;
 }
 
@@ -112,6 +113,14 @@ h1 {
     -webkit-animation:fade-in 5s infinite;
     -webkit-animation-delay: 0.5s; 
     color: red;
+}
+
+#dtE {
+    right:100px;
+    bottom: 200px;
+    -webkit-animation:fade-in 5s infinite;
+    -webkit-animation-delay: 0.2s; 
+    color: lime;
 }
 
 @-webkit-keyframes shake {
