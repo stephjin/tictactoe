@@ -52,15 +52,6 @@ h1 {
   background-size: 200px 200px;
 }
 
-/*.resetButton {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  position: absolute;
-  top: 5%;
-  right: 10%;
-}*/
-
 #newGameButton {
   text-align: center;
   margin-left: 45%;

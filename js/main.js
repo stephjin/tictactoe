@@ -1,23 +1,29 @@
 var myApp = angular.module("MyApp", [])
 
 .controller("MyController", function($scope) {
+  // create empty game board.
   $scope.cellList = [
-    {num: "c0", status: null},
-    {num: "c1", status: null},
-    {num: "c2", status: null},
-    {num: "c3", status: null},
-    {num: "c4", status: null},
-    {num: "c5", status: null},
-    {num: "c6", status: null},
-    {num: "c7", status: null},
-    {num: "c8", status: null}
+    {num: 1, status: null},
+    {num: 2, status: null},
+    {num: 3, status: null},
+    {num: 4, status: null},
+    {num: 5, status: null},
+    {num: 6, status: null},
+    {num: 7, status: null},
+    {num: 8, status: null},
+    {num: 9, status: null}
   ];
 
+  // create initial setting for new game.
   $scope.turnCounter = 0;
   $scope.xWin = false;
   $scope.oWin = false;
+  $scope.gameEnd = false;
 
-// Player X picks any cell to start
+  // set all possible winning combos.
+  $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+
+  // first user to click any cell is player x/doge. users are not permitted to choose already selected cells.
   $scope.playerPicks = function(clickedCell) {
     if (clickedCell.status != null) {
       return;
@@ -27,79 +33,59 @@ var myApp = angular.module("MyApp", [])
       clickedCell.status = "o";
     }$scope.turnCounter++;
 
-    console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. it's " + $scope.turnCounter + "'s turn");
+    // logs in the console whose turn and status of cell.
+    console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. turn number: " + $scope.turnCounter);
+
+    $scope.checkWinner($scope.cellList);
   };
 
-// Checks for winner based on possible combinations. xWin or yWin changes from false to true depending on who wins.
-  $scope.checkWinner = function() {
+  // two for loops interate through each possible combo in the winCombos array and then through each value of a single win combo
+  // xcount and ocount created to keep track of # of how many x's or o's match within a possible winning combo
+  // two if statements check if position of the game board has a status of x or o, if there is a match then add to the xcount
+  // game ends if the turn counter hits 9 and gameEnd is still false
+  $scope.checkWinner = function(list) {
+    for ($scope.i = 0; $scope.i < $scope.winCombos.length; $scope.i++) {
     
-    if (($scope.cellList[0].status == "x" && $scope.cellList[1].status == "x" && $scope.cellList[2].status == "x") || 
-        ($scope.cellList[3].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[5].status == "x") || 
-        ($scope.cellList[6].status == "x" && $scope.cellList[7].status == "x" && $scope.cellList[8].status == "x") || 
-        ($scope.cellList[0].status == "x" && $scope.cellList[3].status == "x" && $scope.cellList[6].status == "x") ||
-        ($scope.cellList[1].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[7].status == "x") ||
-        ($scope.cellList[2].status == "x" && $scope.cellList[5].status == "x" && $scope.cellList[8].status == "x") ||
-        ($scope.cellList[0].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[8].status == "x") ||
-        ($scope.cellList[2].status == "x" && $scope.cellList[4].status == "x" && $scope.cellList[6].status == "x")) {
-          
-        $scope.xWin = true;
-        $scope.winner();
-
-    } else if (($scope.cellList[0].status == "o" && $scope.cellList[1].status == "o" && $scope.cellList[2].status == "o") || 
-        ($scope.cellList[3].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[5].status == "o") || 
-        ($scope.cellList[6].status == "o" && $scope.cellList[7].status == "o" && $scope.cellList[8].status == "o") || 
-        ($scope.cellList[0].status == "o" && $scope.cellList[3].status == "o" && $scope.cellList[6].status == "o") ||
-        ($scope.cellList[1].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[7].status == "o") ||
-        ($scope.cellList[2].status == "o" && $scope.cellList[5].status == "o" && $scope.cellList[8].status == "o") ||
-        ($scope.cellList[0].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[8].status == "o") ||
-        ($scope.cellList[2].status == "o" && $scope.cellList[4].status == "o" && $scope.cellList[6].status == "o")) {
-          
-          $scope.oWin = true;
-          $scope.winner();
-
-    } else if ( ($scope.cellList[0].status == "o" || $scope.cellList[0].status == "x") && 
-        ($scope.cellList[1].status == "o" || $scope.cellList[1].status == "x") &&
-        ($scope.cellList[2].status == "o" || $scope.cellList[2].status == "x") &&
-        ($scope.cellList[3].status == "o" || $scope.cellList[3].status == "x") &&
-        ($scope.cellList[4].status == "o" || $scope.cellList[4].status == "x") &&
-        ($scope.cellList[5].status == "o" || $scope.cellList[5].status == "x") &&
-        ($scope.cellList[6].status == "o" || $scope.cellList[6].status == "x") && 
-        ($scope.cellList[7].status == "o" || $scope.cellList[7].status == "x") &&
-        ($scope.cellList[8].status == "o" || $scope.cellList[8].status == "x")) {
-          alert("cat's game ");
-    } else {
-        return;
-    };
-  };
-
-// winner function logs which player won
-  $scope.winner = function () {
-    if ($scope.xWin == true) {
-      console.log("DOGE WINS!");
-
-    } else {
-      if ($scope.oWin == true) {
-        console.log("DOLFIN WINS!");
+    $scope.xcount = 0;
+    $scope.ocount = 0;
+      
+      for ($scope.j = 0; $scope.j < 3; $scope.j++) {
+        if (list[$scope.winCombos[$scope.i][$scope.j]-1].status == "x") {
+          $scope.xcount++;
+          if ($scope.xcount == 3) {
+            $scope.xWin = true;
+          }
+        } if (list[$scope.winCombos[$scope.i][$scope.j]-1].status == "o") {
+            $scope.ocount++;
+            if ($scope.ocount == 3) {
+              $scope.oWin = true;
+            }
+        } if ($scope.turnCounter == 9 && $scope.gameEnd == false) {
+          $scope.gameEnd = true;
+          alert("boohoo");
+        } 
       }
     }
   };
 
-// play again button
+
+  // resets game board to initial settings
   $scope.newGame = function () {
     $scope.cellList = [
-      {num: "c0", status: null},
-      {num: "c1", status: null},
-      {num: "c2", status: null},
-      {num: "c3", status: null},
-      {num: "c4", status: null},
-      {num: "c5", status: null},
-      {num: "c6", status: null},
-      {num: "c7", status: null},
-      {num: "c8", status: null}
+      {num: 1, status: null},
+      {num: 2, status: null},
+      {num: 3, status: null},
+      {num: 4, status: null},
+      {num: 5, status: null},
+      {num: 6, status: null},
+      {num: 7, status: null},
+      {num: 8, status: null},
+      {num: 9, status: null}
     ];
 
     $scope.turnCounter = 0;
     $scope.xWin = false;
     $scope.oWin = false;
+    $scope.gameEnd = false;
   };
 });

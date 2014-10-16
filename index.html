@@ -11,7 +11,7 @@
 		<div ng-controller="MyController" class="board">	
 			<h1>TIC TAC TOE</h1>
 			<div ng-repeat="currentCell in cellList">
-				<div class="allCells" ng-click="playerPicks(currentCell); checkWinner()" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}" >
+				<div class="allCells" ng-click="playerPicks(currentCell)" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}" >
 				</div>
 			</div>
 			<img class="winnerFull" ng-src="images/doge.gif" ng-show="xWin == true">
