@@ -1,10 +1,12 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
+
 body { 
   background: url('../images/space.jpg');
 }
 
 .board {
   width: 610px;
-  height: 770px;
+  height: 790px;
   background: #fff;
   opacity: 0.95;
   margin: 2% auto;
@@ -54,10 +56,18 @@ h1 {
 
 #newGameButton {
   text-align: center;
-  margin-left: 45%;
+  margin-left: 38%;
   margin-top: 20px;
   position: relative;
-  
+  font-family: 'Open Sans', sans-serif;
+  background-color: #AEDEF4;
+  color: white;
+  border: none;
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px 32px;
 }
 
 @-webkit-keyframes fade-in {

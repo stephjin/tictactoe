@@ -32,7 +32,9 @@ var myApp = angular.module("MyApp", ["firebase"])
   // This container object is what gets synced and appears for both players
   $scope.gameContainer = {
     cellListArray: $scope.cellList,
-    moveCounter: $scope.turnCounter
+    moveCounter: $scope.turnCounter,
+    xWinner: $scope.xWin,
+    oWinner: $scope.oWin
   } ;
 
   $scope.remoteGameContainer.$bind($scope, "gameContainer") ;
@@ -72,19 +74,27 @@ var myApp = angular.module("MyApp", ["firebase"])
         if (list[$scope.winCombos[$scope.i][$scope.j]-1].status == "x") {
           $scope.xcount++;
           if ($scope.xcount == 3) {
-            $scope.xWin = true;
+            $scope.gameContainer.xWinner = true;
           }
         } if (list[$scope.winCombos[$scope.i][$scope.j]-1].status == "o") {
             $scope.ocount++;
             if ($scope.ocount == 3) {
-              $scope.oWin = true;
+              $scope.gameContainer.oWinner = true;
             }
         } if ($scope.gameContainer.moveCounter == 9 && $scope.gameEnd == false) {
           $scope.gameEnd = true;
-          alert("boohoo");
+          $scope.sweetAlert();
         } 
       }
     }
+  };
+
+  $scope.sweetAlert = function () {
+    swal({
+      title: "It's a tie!",   
+      text: "Looks like you'll have to play again.",     
+      confirmButtonText: "Cool"
+    });
   };
 
 
@@ -103,8 +113,8 @@ var myApp = angular.module("MyApp", ["firebase"])
     ];
 
     $scope.gameContainer.moveCounter = 0;
-    $scope.xWin = false;
-    $scope.oWin = false;
+    $scope.gameContainer.xWinner = false;
+    $scope.gameContainer.oWinner = false;
     $scope.gameEnd = false;
   };
 });
