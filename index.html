@@ -3,14 +3,16 @@
 	<head>
 		<title>Tic Tac Toe</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script src="js/angular.min.js"></script>
+		<script src="js/angular.min.js"></script> 
+    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 
 	<body ng-app="MyApp">
-		<div ng-controller="MyController" class="board">	
+		<div ng-controller="MyController" class="board" ng-model="gameContainer">	
 			<h1>TIC TAC TOE</h1>
-			<div ng-repeat="currentCell in cellList">
+			<div  ng-repeat="currentCell in gameContainer.cellListArray">
 				<div class="allCells" ng-click="playerPicks(currentCell)" ng-class="{xMarker: currentCell.status=='x', yMarker: currentCell.status=='o'}" >
 				</div>
 			</div>

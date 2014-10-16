@@ -1,6 +1,12 @@
-var myApp = angular.module("MyApp", [])
+var myApp = angular.module("MyApp", ["firebase"])
 
-.controller("MyController", function($scope) {
+.controller("MyController", function($scope, $firebase) {
+
+  $scope.remoteGameContainer = $firebase(new Firebase("https://skj-tictactoe.firebaseio.com/databaseGameContainer"));
+  // OR write -- var myDataRef = new Firebase("https://skj-tictactoe.firebaseio.com/"); but then you need to connect it to the other parts of the angular board??
+
+
+
   // create empty game board.
   $scope.cellList = [
     {num: 1, status: null},
@@ -23,20 +29,33 @@ var myApp = angular.module("MyApp", [])
   // set all possible winning combos.
   $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
+  // This container object is what gets synced and appears for both players
+  $scope.gameContainer = {
+    cellListArray: $scope.cellList,
+    moveCounter: $scope.turnCounter
+  } ;
+
+  $scope.remoteGameContainer.$bind($scope, "gameContainer") ;
+
+  // $scope.$watch('gameContainer', function() {
+  //   console.log('gameContainer changed!') ;
+  // });
+
+
   // first user to click any cell is player x/doge. users are not permitted to choose already selected cells.
   $scope.playerPicks = function(clickedCell) {
     if (clickedCell.status != null) {
       return;
-    } else if ($scope.turnCounter%2 == 0) {
+    } else if ($scope.gameContainer.moveCounter%2 == 0 ) {
       clickedCell.status = "x";
     } else {
       clickedCell.status = "o";
-    }$scope.turnCounter++;
+    }$scope.gameContainer.moveCounter++;
 
     // logs in the console whose turn and status of cell.
-    console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. turn number: " + $scope.turnCounter);
+    console.log("clicked " + clickedCell.num + ". player " + clickedCell.status + " in this cell. turn number: " + $scope.gameContainer.moveCounter);
 
-    $scope.checkWinner($scope.cellList);
+    $scope.checkWinner($scope.gameContainer.cellListArray);
   };
 
   // two for loops interate through each possible combo in the winCombos array and then through each value of a single win combo
@@ -60,7 +79,7 @@ var myApp = angular.module("MyApp", [])
             if ($scope.ocount == 3) {
               $scope.oWin = true;
             }
-        } if ($scope.turnCounter == 9 && $scope.gameEnd == false) {
+        } if ($scope.gameContainer.moveCounter == 9 && $scope.gameEnd == false) {
           $scope.gameEnd = true;
           alert("boohoo");
         } 
@@ -71,7 +90,7 @@ var myApp = angular.module("MyApp", [])
 
   // resets game board to initial settings
   $scope.newGame = function () {
-    $scope.cellList = [
+    $scope.gameContainer.cellListArray = [
       {num: 1, status: null},
       {num: 2, status: null},
       {num: 3, status: null},
@@ -83,7 +102,7 @@ var myApp = angular.module("MyApp", [])
       {num: 9, status: null}
     ];
 
-    $scope.turnCounter = 0;
+    $scope.gameContainer.moveCounter = 0;
     $scope.xWin = false;
     $scope.oWin = false;
     $scope.gameEnd = false;
