@@ -1,11 +1,14 @@
-var myApp = angular.module("MyApp", ["firebase"])
+var myApp = angular.module("MyApp", ["firebase"]);
 
-.controller("MyController", function($scope, $firebase) {
+var mainFirebaseRef;
 
-  $scope.remoteGameContainer = $firebase(new Firebase("https://skj-tictactoe.firebaseio.com/databaseGameContainer"));
+myApp.controller("MyController", function($scope, $firebase) {
+
   // OR write -- var myDataRef = new Firebase("https://skj-tictactoe.firebaseio.com/"); but then you need to connect it to the other parts of the angular board??
 
-
+  var gameRef = new Firebase("https://skj-doge-ttt.firebaseio.com/");
+  $scope.remoteGameContainer = $firebase(gameRef);
+  mainFirebaseRef = ($scope.remoteGameContainer);
 
   // create empty game board.
   $scope.cellList = [
@@ -29,24 +32,38 @@ var myApp = angular.module("MyApp", ["firebase"])
   // set all possible winning combos.
   $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
-  // This container object is what gets synced and appears for both players
-  $scope.gameContainer = {
-    cellListArray: $scope.cellList,
-    moveCounter: $scope.turnCounter,
-    xWinner: $scope.xWin,
-    oWinner: $scope.oWin
-  } ;
 
-  $scope.remoteGameContainer.$bind($scope, "gameContainer") ;
+  gameRef.once("value", function(data){
+    console.log(data.val());
+    // Let's find out how many players are on this board!
+      console.log($scope.eachPlayer);
+      // If there are no players or we should be resetting, set to imPlayer0
+    if(!data.val() || data.val().numPlayers == 2){
+      $scope.eachPlayer = 0;
+    } 
+    else {
+      $scope.eachPlayer = 1;
+    }
+    $scope.gameContainer = {
+      cellListArray: $scope.cellList,
+      moveCounter: $scope.turnCounter,
+      xWinner: $scope.xWin,
+      oWinner: $scope.oWin,
+      numPlayers: $scope.eachPlayer + 1
+    };
+    $scope.remoteGameContainer.$bind($scope, "gameContainer");
+    $scope.newGame();
+  });
 
-  // $scope.$watch('gameContainer', function() {
-  //   console.log('gameContainer changed!') ;
-  // });
+
+  $scope.$watch('gameContainer', function() {
+    console.log('gameContainer changed!') ;
+  });
 
 
   // first user to click any cell is player x/doge. users are not permitted to choose already selected cells.
   $scope.playerPicks = function(clickedCell) {
-    if (clickedCell.status != null) {
+    if (clickedCell.status != null || $scope.eachPlayer != ($scope.gameContainer.moveCounter % 2)) {
       return;
     } else if ($scope.gameContainer.moveCounter%2 == 0 ) {
       clickedCell.status = "x";

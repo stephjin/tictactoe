@@ -1,5 +1,5 @@
 {
-  "firebase": "skj-tictactoe",
+  "firebase": "skj-doge-ttt",
   "public": ".",
   "ignore": [
     "firebase.json",
