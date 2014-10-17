@@ -27,6 +27,14 @@ var myApp = angular.module("MyApp", ["firebase"])
   // set all possible winning combos.
   $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
+  // $scope.num_players = 2;
+  // $scope.players_location = "player_list";
+  // $scope.player_data = "player_data";
+
+
+
+
+
 
   // method is triggered by value (this event is used to read a static snapshot of the contens of a given path).
   // reads the static snapshot of the ttt fb once and then runs a function that takes in that snapshot.
@@ -34,9 +42,11 @@ var myApp = angular.module("MyApp", ["firebase"])
   gameRef.once("value", function(dataSnapshot){
     if(dataSnapshot.val().numPlayers == 2){
       $scope.eachPlayer = 0;
+      $scope.goPlayerOne();
     } 
     else {
       $scope.eachPlayer = 1;
+      $scope.goPlayerTwo();
     }
     $scope.gameContainer = {
       cellListArray: $scope.cellList,
@@ -107,6 +117,23 @@ var myApp = angular.module("MyApp", ["firebase"])
     });
   };
 
+  $scope.goPlayerOne = function () {
+    swal({
+      title: "Player 1",   
+      text: "You get to go first!",
+      imageUrl: "images/player1.png",     
+      confirmButtonText: "Hotay"
+    });
+  };
+
+  $scope.goPlayerTwo = function () {
+    swal({
+      title: "Player 2",   
+      text: "Wait for Player 1 to make their move.",
+      imageUrl: "images/player2.png",     
+      confirmButtonText: "Hotay"
+    });
+  };
 
   // resets game board to initial settings
   $scope.newGame = function () {

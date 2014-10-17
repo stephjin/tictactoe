@@ -11,7 +11,7 @@
   	<link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
 	</head>
 
-	<body ng-app="MyApp">
+	<body ng-app="MyApp" onload="go()">
 		<div ng-controller="MyController" class="board" ng-model="gameContainer">	
 			<h1>TIC TAC TOE</h1>
 			<div  ng-repeat="currentCell in gameContainer.cellListArray">
