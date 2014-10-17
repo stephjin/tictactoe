@@ -1,14 +1,9 @@
-var myApp = angular.module("MyApp", ["firebase"]);
+var myApp = angular.module("MyApp", ["firebase"])
 
-var mainFirebaseRef;
-
-myApp.controller("MyController", function($scope, $firebase) {
-
-  // OR write -- var myDataRef = new Firebase("https://skj-tictactoe.firebaseio.com/"); but then you need to connect it to the other parts of the angular board??
-
+.controller("MyController", function($scope, $firebase) {
+  // links app to firebase db
   var gameRef = new Firebase("https://skj-doge-ttt.firebaseio.com/");
   $scope.remoteGameContainer = $firebase(gameRef);
-  mainFirebaseRef = ($scope.remoteGameContainer);
 
   // create empty game board.
   $scope.cellList = [
@@ -33,12 +28,11 @@ myApp.controller("MyController", function($scope, $firebase) {
   $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
 
-  gameRef.once("value", function(data){
-    console.log(data.val());
-    // Let's find out how many players are on this board!
-      console.log($scope.eachPlayer);
-      // If there are no players or we should be resetting, set to imPlayer0
-    if(!data.val() || data.val().numPlayers == 2){
+  // method is triggered by value (this event is used to read a static snapshot of the contens of a given path).
+  // reads the static snapshot of the ttt fb once and then runs a function that takes in that snapshot.
+  // calling .val will return js intrepretation of that object in order for you to write conditional statements.
+  gameRef.once("value", function(dataSnapshot){
+    if(dataSnapshot.val().numPlayers == 2){
       $scope.eachPlayer = 0;
     } 
     else {
@@ -52,7 +46,6 @@ myApp.controller("MyController", function($scope, $firebase) {
       numPlayers: $scope.eachPlayer + 1
     };
     $scope.remoteGameContainer.$bind($scope, "gameContainer");
-    $scope.newGame();
   });
 
 
