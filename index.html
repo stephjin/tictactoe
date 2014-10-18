@@ -11,7 +11,7 @@
   	<link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
 	</head>
 
-	<body ng-app="MyApp" onload="go()">
+	<body ng-app="MyApp">
 		<div ng-controller="MyController" class="board" ng-model="gameContainer">	
 			<h1>TIC TAC TOE</h1>
 			<div  ng-repeat="currentCell in gameContainer.cellListArray">
@@ -21,16 +21,16 @@
 			<img class="winnerFull" ng-src="images/doge.gif" ng-show="gameContainer.xWinner == true">
 			<img class="winnerFull" id="dolphinShake" ng-src="images/dolphin.gif" ng-show="gameContainer.oWinner == true">
 
-			<button id="newGameButton" ng-click="newGame()">New Game</button>
-		
-		<!-- use object in js with an array of the keywords then ng-repeat?? -->
-		<div class="dogeText" id="dtA" ng-show="gameContainer.xWinner == true">so amaze</div>
-		<div class="dogeText" id="dtB" ng-show="gameContainer.xWinner == true">many tic tac toe</div>
-		<div class="dogeText" id="dtC" ng-show="gameContainer.xWinner == true">such win</div>
-		<div class="dogeText" id="dtD" ng-show="gameContainer.xWinner == true">doge game master</div>
-		<div class="dogeText" id="dtE" ng-show="gameContainer.xWinner == true">Wow</div>
+			<footer>
+				<button id="newGameButton" ng-click="newGame()">New Game</button>
+			</footer>
+			
+			<!-- use object in js with an array of the keywords then ng-repeat?? -->
+			<div class="dogeText" id="dtA" ng-show="gameContainer.xWinner == true">so amaze</div>
+			<div class="dogeText" id="dtB" ng-show="gameContainer.xWinner == true">many tic tac toe</div>
+			<div class="dogeText" id="dtC" ng-show="gameContainer.xWinner == true">such win</div>
+			<div class="dogeText" id="dtD" ng-show="gameContainer.xWinner == true">doge game master</div>
+			<div class="dogeText" id="dtE" ng-show="gameContainer.xWinner == true">Wow</div>
 		</div>
-
-
 	</body>
 </html>

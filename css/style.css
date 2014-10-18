@@ -6,7 +6,7 @@ body {
 
 .board {
   width: 610px;
-  height: 790px;
+  height: 750px;
   background: #fff;
   opacity: 0.95;
   margin: 2% auto;
@@ -38,8 +38,9 @@ h1 {
 .winnerFull {
   height: 620px;
   width: 620px;
-  position: absolute;
-  left: 530px;
+  position: relative;
+  left: -3px;
+  bottom: 620px;
 }
 
 .xMarker {
@@ -54,9 +55,17 @@ h1 {
   background-size: 200px 200px;
 }
 
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:100px;
+  width:100%;
+}
+
 #newGameButton {
   text-align: center;
-  margin-left: 38%;
+  margin-left: 45%;
   margin-top: 20px;
   position: relative;
   font-family: 'Open Sans', sans-serif;
@@ -89,6 +98,8 @@ h1 {
 }
 
 #dtA {
+    left: 100px;
+    bottom: 150px;
     -webkit-animation:fade-in 3s infinite;
     -webkit-animation-delay: 0.5s;
     color: cyan;

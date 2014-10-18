@@ -27,27 +27,19 @@ var myApp = angular.module("MyApp", ["firebase"])
   // set all possible winning combos.
   $scope.winCombos = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
-  // $scope.num_players = 2;
-  // $scope.players_location = "player_list";
-  // $scope.player_data = "player_data";
-
-
-
-
-
-
   // method is triggered by value (this event is used to read a static snapshot of the contens of a given path).
   // reads the static snapshot of the ttt fb once and then runs a function that takes in that snapshot.
   // calling .val will return js intrepretation of that object in order for you to write conditional statements.
-  gameRef.once("value", function(dataSnapshot){
-    if(dataSnapshot.val().numPlayers == 2){
-      $scope.eachPlayer = 0;
-      $scope.goPlayerOne();
-    } 
-    else {
-      $scope.eachPlayer = 1;
-      $scope.goPlayerTwo();
-    }
+
+  // gameRef.once("value", function(dataSnapshot){
+  //   if(dataSnapshot.val().numPlayers == 2){
+  //     $scope.eachPlayer = 0;
+  //     $scope.goPlayerOne();
+  //   } 
+  //   else {
+  //     $scope.eachPlayer = 1;
+  //     $scope.goPlayerTwo();
+  //   }
     $scope.gameContainer = {
       cellListArray: $scope.cellList,
       moveCounter: $scope.turnCounter,
@@ -56,7 +48,7 @@ var myApp = angular.module("MyApp", ["firebase"])
       numPlayers: $scope.eachPlayer + 1
     };
     $scope.remoteGameContainer.$bind($scope, "gameContainer");
-  });
+  // });
 
 
   $scope.$watch('gameContainer', function() {
@@ -65,8 +57,9 @@ var myApp = angular.module("MyApp", ["firebase"])
 
 
   // first user to click any cell is player x/doge. users are not permitted to choose already selected cells.
+  // || $scope.eachPlayer != ($scope.gameContainer.moveCounter % 2)
   $scope.playerPicks = function(clickedCell) {
-    if (clickedCell.status != null || $scope.eachPlayer != ($scope.gameContainer.moveCounter % 2)) {
+    if (clickedCell.status != null ) {
       return;
     } else if ($scope.gameContainer.moveCounter%2 == 0 ) {
       clickedCell.status = "x";
