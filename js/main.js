@@ -31,15 +31,15 @@ var myApp = angular.module("MyApp", ["firebase"])
   // reads the static snapshot of the ttt fb once and then runs a function that takes in that snapshot.
   // calling .val will return js intrepretation of that object in order for you to write conditional statements.
 
-  // gameRef.once("value", function(dataSnapshot){
-  //   if(dataSnapshot.val().numPlayers == 2){
-  //     $scope.eachPlayer = 0;
-  //     $scope.goPlayerOne();
-  //   } 
-  //   else {
-  //     $scope.eachPlayer = 1;
-  //     $scope.goPlayerTwo();
-  //   }
+  gameRef.once("value", function(dataSnapshot){
+    if(dataSnapshot.val().numPlayers == 2){
+      $scope.eachPlayer = 0;
+      $scope.goPlayerOne();
+    } 
+    else {
+      $scope.eachPlayer = 1;
+      $scope.goPlayerTwo();
+    }
     $scope.gameContainer = {
       cellListArray: $scope.cellList,
       moveCounter: $scope.turnCounter,
@@ -48,18 +48,18 @@ var myApp = angular.module("MyApp", ["firebase"])
       numPlayers: $scope.eachPlayer + 1
     };
     $scope.remoteGameContainer.$bind($scope, "gameContainer");
-  // });
+  });
 
-
+  // ???
   $scope.$watch('gameContainer', function() {
     console.log('gameContainer changed!') ;
   });
 
 
   // first user to click any cell is player x/doge. users are not permitted to choose already selected cells.
-  // || $scope.eachPlayer != ($scope.gameContainer.moveCounter % 2)
+
   $scope.playerPicks = function(clickedCell) {
-    if (clickedCell.status != null ) {
+    if (clickedCell.status != null || $scope.eachPlayer != ($scope.gameContainer.moveCounter % 2)) {
       return;
     } else if ($scope.gameContainer.moveCounter%2 == 0 ) {
       clickedCell.status = "x";
@@ -102,6 +102,7 @@ var myApp = angular.module("MyApp", ["firebase"])
     }
   };
 
+  // SweetAlerts to alert whose turn it is and cat's game.
   $scope.sweetAlert = function () {
     swal({
       title: "It's a tie!",   
